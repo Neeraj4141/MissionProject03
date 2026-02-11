@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import in.co.rays.project_3.dto.BaseDTO;
 import in.co.rays.project_3.dto.UserDTO;
 import in.co.rays.project_3.util.DataUtility;
+import in.co.rays.project_3.util.DataValidator;
 
 public abstract class BaseCtl extends HttpServlet {
 

@@ -38,7 +38,7 @@ public class DataUtility {
 		}
 	}
 
-	public static Long gwtLong(String val) {
+	public static Long getLong(String val) {
 		System.out.println("...............in dataUtility............." + val);
 		if (DataValidator.isLong(val)) {
 			System.out.println("..............in dataUtility" + val + ",,,,,," + Long.parseLong(val));

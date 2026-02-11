@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import in.co.rays.project_3.controller.BaseCtl;
+import in.co.rays.project_3.dto.BaseDTO;
 import in.co.rays.project_3.dto.ORSView;
 
 public class ServletUtility {
@@ -46,7 +48,7 @@ public class ServletUtility {
 		request.setAttribute(BaseCtl.MSG_ERROR, msg);
 	}
 
-	public static String getErrorMessage(HttpServletRequest request, HttpServletResponse response) {
+	public static String getErrorMessage(HttpServletRequest request) {
 		String val = (String) request.getAttribute(BaseCtl.MSG_SUCCESS);
 		if (val == null) {
 			return "";

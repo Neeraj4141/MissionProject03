@@ -1,27 +1,59 @@
 package in.co.rays.project_3.dto;
 
-public class BaseDTO implements Comparable<BaseDTO>, DropdownList {
+import java.sql.Timestamp;
+
+public abstract class BaseDTO implements Comparable<BaseDTO>, DropdownList {
 
 	private static final long serialVersionUID = 1L;
-	
-	
 
-	@Override
-	public String getKey() {
-		// TODO Auto-generated method stub
-		return null;
+	protected Long id;
+	protected String createdBy;
+	protected String modifiedBy;
+	protected Timestamp createdDatetime;
+	protected Timestamp modifiedDatetime;
+
+	public Long getId() {
+		return id;
 	}
 
-	@Override
-	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	@Override
-	public int compareTo(BaseDTO o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public Timestamp getCreatedDatetime() {
+		return createdDatetime;
+	}
+
+	public void setCreatedDatetime(Timestamp createdDatetime) {
+		this.createdDatetime = createdDatetime;
+	}
+
+	public Timestamp getModifiedDatetime() {
+		return modifiedDatetime;
+	}
+
+	public void setModifiedDatetime(Timestamp modifiedDatetime) {
+		this.modifiedDatetime = modifiedDatetime;
+	}
+
+	public int compareTo(BaseDTO next) {
+		return getValue().compareTo(next.getValue());
 	}
 
 }
