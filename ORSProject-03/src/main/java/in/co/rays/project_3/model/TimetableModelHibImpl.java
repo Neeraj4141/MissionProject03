@@ -17,16 +17,10 @@ import in.co.rays.project_3.exception.ApplicationException;
 import in.co.rays.project_3.exception.DuplicateRecordException;
 import in.co.rays.project_3.util.HibDataSource;
 
-/**
- * Hibernate implements of TimeTable model
- * 
- * @author Neeraj Mewada
- *
- */
 public class TimetableModelHibImpl implements TimetableModelInt {
 
 	public long add(TimetableDTO dto) throws ApplicationException, DuplicateRecordException {
-		// TODO Auto-generated method stub
+
 		CourseModelInt Cmodel = ModelFactory.getInstance().getCourseModel();
 		CourseDTO Cbean = null;
 		Cbean = Cmodel.findByPK(dto.getCourseId());
@@ -60,7 +54,7 @@ public class TimetableModelHibImpl implements TimetableModelInt {
 	}
 
 	public void delete(TimetableDTO dto) throws ApplicationException {
-		// TODO Auto-generated method stub
+
 		Session session = null;
 		Transaction tx = null;
 		try {
@@ -70,7 +64,7 @@ public class TimetableModelHibImpl implements TimetableModelInt {
 			tx.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			// TODO: handle exception
+
 			if (tx != null) {
 				tx.rollback();
 
@@ -82,7 +76,7 @@ public class TimetableModelHibImpl implements TimetableModelInt {
 	}
 
 	public void update(TimetableDTO dto) throws ApplicationException, DuplicateRecordException {
-		// TODO Auto-generated method stub
+
 		CourseModelInt Cmodel = ModelFactory.getInstance().getCourseModel();
 		CourseDTO Cbean = null;
 		Cbean = Cmodel.findByPK(dto.getCourseId());
@@ -102,7 +96,7 @@ public class TimetableModelHibImpl implements TimetableModelInt {
 
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			// TODO: handle exception
+
 			if (tx != null) {
 				tx.rollback();
 
@@ -114,7 +108,7 @@ public class TimetableModelHibImpl implements TimetableModelInt {
 	}
 
 	public List list() throws ApplicationException {
-		// TODO Auto-generated method stub
+
 		return list(0, 0);
 	}
 
@@ -142,12 +136,12 @@ public class TimetableModelHibImpl implements TimetableModelInt {
 	}
 
 	public List search(TimetableDTO dto) throws ApplicationException {
-		// TODO Auto-generated method stub
+
 		return search(dto, 0, 0);
 	}
 
 	public List search(TimetableDTO dto, int pageNo, int pageSize) throws ApplicationException {
-		// TODO Auto-generated method stub
+
 		System.out.println("kkkkkkkk" + dto.getCourseId() + "....." + dto.getSubId() + ";;;;;" + dto.getExamDate());
 
 		Session session = null;
@@ -193,7 +187,7 @@ public class TimetableModelHibImpl implements TimetableModelInt {
 	}
 
 	public TimetableDTO findByPK(long pk) throws ApplicationException {
-		// TODO Auto-generated method stub
+
 		Session session = null;
 		TimetableDTO dto = null;
 		try {
@@ -211,7 +205,7 @@ public class TimetableModelHibImpl implements TimetableModelInt {
 
 	public TimetableDTO checkByCourseName(long courseId, java.util.Date examDate)
 			throws ApplicationException, DuplicateRecordException {
-		// TODO Auto-generated method stub
+
 		long l = examDate.getTime();
 		java.sql.Date date = new java.sql.Date(l);
 		Session session = null;
@@ -236,7 +230,7 @@ public class TimetableModelHibImpl implements TimetableModelInt {
 
 	public TimetableDTO checkBySubjectName(long courseId, long subjectId, Date examDate)
 			throws ApplicationException, DuplicateRecordException {
-		// TODO Auto-generated method stub
+
 		long l = examDate.getTime();
 		java.sql.Date date = new java.sql.Date(l);
 		Session session = null;

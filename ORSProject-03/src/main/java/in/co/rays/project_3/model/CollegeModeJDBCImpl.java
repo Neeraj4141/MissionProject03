@@ -13,15 +13,9 @@ import in.co.rays.project_3.dto.CollegeDTO;
 import in.co.rays.project_3.exception.ApplicationException;
 import in.co.rays.project_3.exception.DatabaseException;
 import in.co.rays.project_3.exception.DuplicateRecordException;
-import in.co.rays.project_3.util.HibDataSource;
+
 import in.co.rays.project_3.util.JDBCDataSource;
 
-/**
- * JDBC implements of College model
- * 
- * @author Neeraj Mewada
- *
- */
 public class CollegeModeJDBCImpl implements CollegeModelInt {
 	private static Logger log = Logger.getLogger(CollegeModeJDBCImpl.class);
 

@@ -17,21 +17,12 @@ import in.co.rays.project_3.exception.DatabaseException;
 import in.co.rays.project_3.exception.DuplicateRecordException;
 import in.co.rays.project_3.util.JDBCDataSource;
 
-/**
- * JDBC implements of TimeTable model
- * @author Neeraj Mewada
- *
- */
+
 public class TimetableModelJDBCImpl implements TimetableModelInt {
 	private static Logger log = Logger.getLogger(TimetableModelJDBCImpl.class);
 	Connection con = null;
 
-	/**
-	 * create id
-	 * 
-	 * @return pk
-	 * @throws DatabaseException
-	 */
+	
 	public long nextPK() throws DatabaseException {
 		long pk = 0;
 		try {
@@ -50,30 +41,14 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 		return pk + 1;
 	}
 
-	/**
-	 * add timetable
-	 * 
-	 * @param tdto
-	 * @return
-	 * @throws ApplicationException
-	 */
+	
 	public long add(TimetableDTO tdto) throws ApplicationException {
 		long pk = 0;
 		java.util.Date d = tdto.getExamDate();
 		long l = d.getTime();
 		java.sql.Date date = new java.sql.Date(l);
 
-		/*// get course Name and Subject Name by id
-		       CourseModelInt model1 = ModelFactory.getInstance().getCourseModel();
-				
-				CourseDTO cdto = null;
-				cdto = model1.findByPK(tdto.getCourseId());
-				tdto.setCourseName(cdto.getCourseName());
-
-				SubjectModelInt model2 = ModelFactory.getInstance().getSubjectModel();
-				
-				SubjectDTO sdto = model2.findByPK(tdto.getSubId());
-				tdto.setSubName(sdto.getSubjectName());*/
+		
 
 		try {
 			pk = nextPK();
@@ -112,12 +87,7 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 
 	}
 
-	/**
-	 * delete timetable
-	 * 
-	 * @param tdto
-	 * @throws ApplicationException
-	 */
+	
 	public void delete(TimetableDTO tdto) throws ApplicationException {
 		try {
 
@@ -143,13 +113,7 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 		log.debug("Model delete Started");
 	}
 
-	/**
-	 * update timetable
-	 * 
-	 * @param tdto
-	 * @throws ApplicationException
-	 * @throws DatabaseException
-	 */
+	
 	public void update(TimetableDTO tdto) throws DatabaseException, ApplicationException {
 		long pk = nextPK();
 		System.out.println("update start" + tdto.getSemester());
@@ -157,18 +121,7 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 		long l = d.getTime();
 		java.sql.Date date = new java.sql.Date(l);
 		System.out.println(date);
-	/*	// get course Name and Subject Name by id
-	       CourseModelInt model1 = ModelFactory.getInstance().getCourseModel();
-			
-			CourseDTO cdto = null;
-			cdto = model1.findByPK(tdto.getCourseId());
-			tdto.setCourseName(cdto.getCourseName());
-
-			SubjectModelInt model2 = ModelFactory.getInstance().getSubjectModel();
-			
-			SubjectDTO sdto = model2.findByPK(tdto.getSubId());
-			tdto.setSubName(sdto.getSubjectName());
-*/
+	
 		try {
 
 			con = JDBCDataSource.getConnection();
@@ -194,7 +147,7 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 			System.out.println(" time table update data successfully");
 
 		} catch (Exception e) {
-			log.error("Database Exception..", e);
+			
 			try {
 				con.rollback();
 			} catch (Exception ex) {
@@ -206,13 +159,7 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 		}
 	}
 
-	/**
-	 * find time table by pk
-	 * 
-	 * @param pk
-	 * @return dto
-	 * @throws ApplicationException
-	 */
+	
 	public TimetableDTO findByPK(long pk) throws ApplicationException {
 
 		TimetableDTO dto = null;
@@ -238,12 +185,12 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 			con.close();
 
 		} catch (Exception e) {
-			log.error("Database Exception..", e);
+			
 			throw new ApplicationException("Exception : Exception in getting Timetable by pk");
 		} finally {
 			JDBCDataSource.closeConnection(con);
 		}
-		log.debug("model findBy pk end");
+	
 
 		return dto;
 
@@ -254,21 +201,14 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 		return list(0, 0);
 	}
 
-	/**
-	 * list of time table
-	 * 
-	 * @param pageNo
-	 * @param pageSize
-	 * @return
-	 * @throws ApplicationException
-	 */
+	
 	public List list(int pageNo, int pageSize) throws ApplicationException {
-		log.debug("Model list Started");
+	
 		ArrayList list = new ArrayList();
 		StringBuffer sql = new StringBuffer("select * from st_timetable");
-		// if page size is greater than zero then apply pagination
+	
 		if (pageSize > 0) {
-			// Calculate start record index
+		
 			pageNo = (pageNo - 1) * pageSize;
 			sql.append(" limit " + pageNo + "," + pageSize);
 		}
@@ -293,13 +233,13 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 			}
 			rs.close();
 		} catch (Exception e) {
-			log.error("Database Exception..", e);
+			
 			throw new ApplicationException("Exception : Exception in getting list of Role");
 		} finally {
 			JDBCDataSource.closeConnection(conn);
 		}
 
-		log.debug("Model list End");
+		
 		return list;
 
 	}
@@ -308,15 +248,7 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 		return search(dto, 0, 0);
 	}
 
-	/**
-	 * search time table
-	 * 
-	 * @param tdto1
-	 * @param pageNo
-	 * @param pageSize
-	 * @return
-	 * @throws ApplicationException
-	 */
+	
 	public List search(TimetableDTO tdto1, int pageNo, int pageSize) throws ApplicationException {
 
 		StringBuffer sql = new StringBuffer("select * from ST_TIMETABLE where 1=1");
@@ -353,12 +285,11 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 			}
 					}
 		if (pageSize > 0) {
-			// Calculate start record index
 			pageNo = (pageNo - 1) * pageSize;
 
 			sql.append(" Limit " + pageNo + "," + pageSize);
 
-			// sql.append(" limit " + pageNo + "," + pageSize);
+			
 		}
 		ArrayList<TimetableDTO> a = new ArrayList<TimetableDTO>();
 
@@ -389,18 +320,13 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 			JDBCDataSource.closeConnection(con);
 		}
 
-		log.debug("Model search End");
+		
 
 		return a;
 
 	}
 
-	/**
-	 * @param CourseId
-	 * @param ExamDate
-	 * @return
-	 * @throws ApplicationException
-	 */
+	
 	public  TimetableDTO checkByCourseName(long CourseId, java.util.Date ExamDate) throws ApplicationException {
 		long l = ExamDate.getTime();
 		java.sql.Date date = new java.sql.Date(l);
@@ -435,13 +361,7 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 		return dto;
 	}
 
-	/**
-	 * @param CourseId
-	 * @param SubjectId
-	 * @param ExamDAte
-	 * @return
-	 * @throws ApplicationException
-	 */
+	
 	public TimetableDTO checkBySubjectName(long CourseId, long SubjectId, java.util.Date examDate)
 			throws ApplicationException {
 		long l = examDate.getTime();
@@ -479,15 +399,7 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 		return dto;
 	}
 
-	/**
-	 * @param CourseId
-	 * @param SubjectId
-	 * @param semester
-	 * @param ExamDAte
-	 * @throws ApplicationException 
-	 * 
-	 * 
-	 */
+	
 	public  TimetableDTO checkBysemester(long CourseId, long SubjectId, String semester, java.util.Date ExamDAte) throws ApplicationException
 			 {
 		long l = ExamDAte.getTime();
@@ -528,15 +440,7 @@ public class TimetableModelJDBCImpl implements TimetableModelInt {
 		return dto;
 	}
 
-	/**
-	 * @param ExamTime
-	 * @param CourseId
-	 * @param SubjectId
-	 * @param semester
-	 * @param ExamDAte
-	 * @return
-	 * @throws ApplicationException
-	 */
+	
 	public  TimetableDTO checkByExamTime(long CourseId, long SubjectId, String semester, java.util.Date ExamDAte,
 			String ExamTime) throws ApplicationException {
 
