@@ -29,6 +29,50 @@ public final class ModelFactory {
 		return mFactory;
 	}
 
+	public MarksheetModelInt getMarksheetModel() {
+		MarksheetModelInt marksheetModel = (MarksheetModelInt) modelCache.get("marksheetModel");
+		if (marksheetModel == null) {
+			if ("Hibernate".equals(DATABASE)) {
+				marksheetModel = new MarksheetModelHibImpl();
+			}
+			if ("JDBC".equals(DATABASE)) {
+				marksheetModel = new MarksheetModelJDBCImpl();
+			}
+			modelCache.put("marksheetModel", marksheetModel);
+		}
+		return marksheetModel;
+	}
+
+	public CollegeModelInt getCollegeModel() {
+		CollegeModelInt collegeModel = (CollegeModelInt) modelCache.get("collegeModel");
+		if (collegeModel == null) {
+			if ("Hibernate".equals(DATABASE)) {
+				collegeModel = new CollegeModelHibImpl();
+
+			}
+			if ("JDBC".equals(DATABASE)) {
+				collegeModel = new CollegeModeJDBCImpl();
+			}
+			modelCache.put("collegeModel", collegeModel);
+		}
+		return collegeModel;
+	}
+
+	public RoleModelInt getRoleModel() {
+		RoleModelInt roleModel = (RoleModelInt) modelCache.get("roleModel");
+		if (roleModel == null) {
+			if ("Hibernate".equals(DATABASE)) {
+				roleModel = new RoleModelHibImpl();
+
+			}
+			if ("JDBC".equals(DATABASE)) {
+				roleModel = new RoleModelJDBCImpl();
+			}
+			modelCache.put("roleModel", roleModel);
+		}
+		return roleModel;
+	}
+
 	public UserModelInt getUserModel() {
 
 		UserModelInt userModel = (UserModelInt) modelCache.get("userModel");
@@ -45,4 +89,80 @@ public final class ModelFactory {
 		return userModel;
 	}
 
+	public StudentModelInt getStudentModel() {
+		StudentModelInt studentModel = (StudentModelInt) modelCache.get("studentModel");
+		if (studentModel == null) {
+			if ("Hibernate".equals(DATABASE)) {
+				studentModel = new StudentModelHibImpl();
+			}
+			if ("JDBC".equals(DATABASE)) {
+				studentModel = new StudentModelJDBCImpl();
+			}
+			modelCache.put("studentModel", studentModel);
+		}
+
+		return studentModel;
+	}
+
+	public CourseModelInt getCourseModel() {
+		CourseModelInt courseModel = (CourseModelInt) modelCache.get("courseModel");
+		if (courseModel == null) {
+			if ("Hibernate".equals(DATABASE)) {
+				courseModel = new CourseModelHibImpl();
+			}
+			if ("JDBC".equals(DATABASE)) {
+				courseModel = new CourseModelJDBCImpl();
+			}
+			modelCache.put("courseModel", courseModel);
+		}
+
+		return courseModel;
+	}
+
+	public TimetableModelInt getTimetableModel() {
+
+		TimetableModelInt timetableModel = (TimetableModelInt) modelCache.get("timetableModel");
+
+		if (timetableModel == null) {
+			if ("Hibernate".equals(DATABASE)) {
+				timetableModel = new TimetableModelHibImpl();
+			}
+			if ("JDBC".equals(DATABASE)) {
+				timetableModel = new TimetableModelJDBCImpl();
+			}
+			modelCache.put("timetableModel", timetableModel);
+		}
+
+		return timetableModel;
+	}
+
+	public SubjectModelInt getSubjectModel() {
+		SubjectModelInt subjectModel = (SubjectModelInt) modelCache.get("subjectModel");
+		if (subjectModel == null) {
+			if ("Hibernate".equals(DATABASE)) {
+				subjectModel = new SubjectModelHibImpl();
+			}
+			if ("JDBC".equals(DATABASE)) {
+				subjectModel = new SubjectModelJDBCImpl();
+			}
+			modelCache.put("subjectModel", subjectModel);
+		}
+
+		return subjectModel;
+	}
+
+	public FacultyModelInt getFacultyModel() {
+		FacultyModelInt facultyModel = (FacultyModelInt) modelCache.get("facultyModel");
+		if (facultyModel == null) {
+			if ("Hibernate".equals(DATABASE)) {
+				facultyModel = new FacultyModelJDBCImpl();
+			}
+			if ("JDBC".equals(DATABASE)) {
+				facultyModel = new FacultyModelJDBCImpl();
+			}
+			modelCache.put("facultyModel", facultyModel);
+		}
+
+		return facultyModel;
+	}
 }

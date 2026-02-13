@@ -6,9 +6,9 @@ public class MarksheetDTO extends BaseDTO {
 	private String rollNo;
 	private long studentId;
 	private String name;
-	private String physics;
-	private String chemistry;
-	private String maths;
+	private Integer physics;
+	private Integer chemistry;
+	private Integer maths;
 
 	public String getRollNo() {
 		return rollNo;
@@ -34,27 +34,27 @@ public class MarksheetDTO extends BaseDTO {
 		this.name = name;
 	}
 
-	public String getPhysics() {
+	public Integer getPhysics() {
 		return physics;
 	}
 
-	public void setPhysics(String physics) {
+	public void setPhysics(Integer physics) {
 		this.physics = physics;
 	}
 
-	public String getChemistry() {
+	public Integer getChemistry() {
 		return chemistry;
 	}
 
-	public void setChemistry(String chemistry) {
+	public void setChemistry(Integer chemistry) {
 		this.chemistry = chemistry;
 	}
 
-	public String getMaths() {
+	public Integer getMaths() {
 		return maths;
 	}
 
-	public void setMaths(String maths) {
+	public void setMaths(Integer maths) {
 		this.maths = maths;
 	}
 
