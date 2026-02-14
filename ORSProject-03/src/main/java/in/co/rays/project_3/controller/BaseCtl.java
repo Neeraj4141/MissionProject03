@@ -1,13 +1,18 @@
 package in.co.rays.project_3.controller;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import in.co.rays.project_3.dto.BaseDTO;
 import in.co.rays.project_3.dto.UserDTO;
 import in.co.rays.project_3.util.DataUtility;
 import in.co.rays.project_3.util.DataValidator;
+import in.co.rays.project_3.util.ServletUtility;
 
 public abstract class BaseCtl extends HttpServlet {
 
@@ -29,14 +34,14 @@ public abstract class BaseCtl extends HttpServlet {
 	public static final String OP_CHANGE_MY_PROFILE = "MyProfile";
 
 	public static final String MSG_SUCCESS = "success";
+
 	public static final String MSG_ERROR = "error";
 
 	protected boolean validate(HttpServletRequest request) {
 		return true;
 	}
 
-	protected boolean preload(HttpServletRequest request) {
-		return true;
+	protected void preload(HttpServletRequest request) {
 	}
 
 	protected BaseDTO populateBean(BaseDTO dto, HttpServletRequest request) {
@@ -45,8 +50,6 @@ public abstract class BaseCtl extends HttpServlet {
 
 		String createdBy = request.getParameter("createdBy");
 		String modifiedBy = null;
-
-		// UserDTO userDto=(UserDTO)request.getSession().getAttribute("user");
 
 		HttpSession session = request.getSession();
 
@@ -76,4 +79,31 @@ public abstract class BaseCtl extends HttpServlet {
 		return dto;
 	}
 
+	protected BaseDTO populateDTO(HttpServletRequest request) {
+		return null;
+	}
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		preload(request);
+
+		String op = DataUtility.getString(request.getParameter("operation"));
+
+		if (DataValidator.isNotNull(op) && !OP_CANCEL.equalsIgnoreCase(op) && !OP_VIEW.equalsIgnoreCase(op)
+				&& !OP_DELETE.equalsIgnoreCase(op) && !OP_RESET.equalsIgnoreCase(op)) {
+
+			if (!validate(request)) {
+				BaseDTO dto = (BaseDTO) populateDTO(request);
+				ServletUtility.setDto(dto, request);
+				ServletUtility.forward(getView(), request, response);
+				return;
+			}
+		}
+		super.service(request, response);
+		System.out.println("Service base");
+	}
+
+	protected abstract String getView();
 }
